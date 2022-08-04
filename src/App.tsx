@@ -1,34 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import Container from "./components/Container";
+import Navbar from "./components/Navbar";
+import UseStateDemo from "./components/demos/UseStateDemo";
+import UseEffectDemo from "./components/demos/UseEffectDemo";
+import React, { useState } from "react";
+import UseContextDemo from "./components/demos/UseContextDemo";
+import UseReducerDemo from "./components/demos/UseReducerDemo";
+import UseMemoDemo from "./components/demos/UseMemoDemo";
+import UseCallbackDemo from "./components/demos/UseCallbackDemo";
+import UseIdDemo from "./components/demos/UseIdDemo";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+interface Theme {
+  [theme: string]: any;
 }
 
-export default App
+const themes: Theme = {
+  light: {
+    background: "bg-slate-100",
+  },
+  dark: {
+    background: "bg-slate-500",
+  },
+};
+
+export const ThemeContext = React.createContext(themes.light);
+
+function App() {
+  const [theme, setTheme] = useState("light");
+
+  function toggleTheme() {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }
+
+  return (
+    <>
+      <Navbar />
+      <ThemeContext.Provider value={[themes[theme], toggleTheme]}>
+        <Container>
+          <Routes>
+            <Route path="*" element={<UseStateDemo />} />
+            <Route path="useEffect" element={<UseEffectDemo />} />
+            <Route path="useContext" element={<UseContextDemo />} />
+            <Route path="useReducer" element={<UseReducerDemo />} />
+            <Route path="useMemo" element={<UseMemoDemo />} />
+            <Route path="useCallback" element={<UseCallbackDemo />} />
+            <Route path="useId" element={<UseIdDemo />} />
+          </Routes>
+        </Container>
+      </ThemeContext.Provider>
+    </>
+  );
+}
+
+export default App;
