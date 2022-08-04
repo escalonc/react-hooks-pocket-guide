@@ -11,7 +11,7 @@ export default function EmailInput({ label, name }: EmailInputProps) {
   return (
     <div>
       <label htmlFor={id}>
-        {label}
+        {`${label}: `}
         <input type="text" name={name} id={id} />
       </label>
     </div>

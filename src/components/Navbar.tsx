@@ -26,6 +26,12 @@ export default function Navbar() {
         <Link to="useId">
           <NavItem>useId</NavItem>
         </Link>
+        <Link to="useDeferredValue">
+          <NavItem>useDeferredValue</NavItem>
+        </Link>
+        <Link to="useTransition">
+          <NavItem>useTransition</NavItem>
+        </Link>
       </ul>
     </nav>
   );

@@ -9,6 +9,8 @@ import UseReducerDemo from "./components/demos/UseReducerDemo";
 import UseMemoDemo from "./components/demos/UseMemoDemo";
 import UseCallbackDemo from "./components/demos/UseCallbackDemo";
 import UseIdDemo from "./components/demos/UseIdDemo";
+import UseDeferredValue from "./components/demos/UseDeferredValue";
+import UseTransitionDemo from "./components/demos/UseTransitionDemo";
 
 interface Theme {
   [theme: string]: any;
@@ -49,6 +51,8 @@ function App() {
             <Route path="useMemo" element={<UseMemoDemo />} />
             <Route path="useCallback" element={<UseCallbackDemo />} />
             <Route path="useId" element={<UseIdDemo />} />
+            <Route path="useDeferredValue" element={<UseDeferredValue />} />
+            <Route path="useTransition" element={<UseTransitionDemo />} />
           </Routes>
         </Container>
       </ThemeContext.Provider>
