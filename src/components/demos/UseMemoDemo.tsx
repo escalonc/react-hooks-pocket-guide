@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { logTime } from "../../utils";
 import Title from "../Title";
 
 function longTask(seed: number) {
@@ -15,8 +16,11 @@ function longTask(seed: number) {
 export default function UseMemoDemo() {
   const [seed, setSeed] = useState(10);
   const [text, setText] = useState("");
+  const t0 = performance.now();
   // const value = longTask(seed);
   const value = useMemo(() => longTask(seed), [seed]);
+  const t1 = performance.now();
+  logTime(t0, t1);
 
   return (
     <div>
@@ -32,6 +36,9 @@ export default function UseMemoDemo() {
           />
         </label>
         <br />
+        <p className="my-4 text-blue-800 font-bold" id="rendering-time">
+          Rendering time:{" "}
+        </p>
         <label>
           Some text:
           <input

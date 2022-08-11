@@ -22,14 +22,19 @@ export default function UseTransitionDemo() {
             className="block"
             type="text"
             onChange={(e) => {
-              setSearch(e.target.value);
+              const value = e.target.value;
+              setSearch(value);
               startTransition(() => {
                 setResults(
                   getResults().filter(
-                    (result) => search && result.includes(search)
+                    (result) => value && result.includes(value)
                   )
                 );
               });
+
+              // setResults(
+              //   getResults().filter((result) => value && result.includes(value))
+              // );
             }}
             value={search}
           />

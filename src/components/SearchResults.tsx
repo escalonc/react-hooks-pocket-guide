@@ -1,4 +1,5 @@
 import { useDeferredValue, useMemo } from "react";
+import { logTime } from "../utils";
 
 interface SearchResultsProps {
   search: string;
@@ -11,14 +12,22 @@ export default function SearchResults({ search }: SearchResultsProps) {
       .filter((result) => search && result.includes(search));
   };
 
-  const deferredSearch = useDeferredValue(search);
+  const searchTerm = useDeferredValue(search);
+  const results = useMemo(() => getResults(searchTerm), [searchTerm]);
 
-  const results = useMemo(() => getResults(deferredSearch), [deferredSearch]);
+  // const searchTerm = search;
+  // const results = getResults(searchTerm);
+
   return (
-    <div className="max-h-96 h-96 overflow-scroll">
-      {results.map((result, index) => (
-        <p key={index}>{result}</p>
-      ))}
+    <div>
+      <p className="my-4 text-blue-800 font-bold" id="rendering-time">
+        Rendering time:{" "}
+      </p>
+      <div className="max-h-96 h-96 overflow-scroll">
+        {results.map((result, index) => (
+          <p key={index}>{result}</p>
+        ))}
+      </div>
     </div>
   );
 }
